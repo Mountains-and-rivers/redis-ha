@@ -14,7 +14,7 @@ redis-master-service     ClusterIP   10.109.40.60   <none>        6379/TCP    23
 redis-sentinel-service   ClusterIP   10.102.2.210   <none>        26379/TCP   23s
 ```
 
-域名解析验证
+域名解析验证  
  #注意格式 $(podname).$(service name).$(namespace)
 
 ```
