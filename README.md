@@ -93,7 +93,7 @@ RUN npm update
 # Make the application run when running the container
 CMD ["node", "app.js"]
 ```
-
+app.js
 ```
 const sentinel = require('redis-sentinel');
 const sentinels = [ // 哨兵节点的地址与端口集合
