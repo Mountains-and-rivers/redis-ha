@@ -1,4 +1,13 @@
 # redis-ha
+
+制作镜像  
+
+```
+cd docker 
+
+docker build -t redis-sentinel-ha-cluster:1.0 .
+```
+
 部署
 
 ```
