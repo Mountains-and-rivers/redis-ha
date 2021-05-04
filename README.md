@@ -68,3 +68,47 @@ Warning: Using a password with '-a' or '-u' option on the command line interface
 127.0.0.1:6379> 
 ```
 
+nodejs连接测试[TODO]
+
+```
+# This official base image contains node.js and npm
+FROM node:7
+
+ARG VERSION=1.0.0
+
+# Copy the application files
+WORKDIR /usr/src/app
+COPY package.json app.js LICENSE /usr/src/app/
+COPY lib /usr/src/app/lib/
+
+LABEL license=MIT \
+      version=$VERSION
+
+# Set required environment variables
+ENV NODE_ENV production
+
+# Download the required packages for production
+RUN npm update
+
+# Make the application run when running the container
+CMD ["node", "app.js"]
+```
+
+```
+const sentinel = require('redis-sentinel');
+const sentinels = [ // 哨兵节点的地址与端口集合
+    { host: 'redis-sentinel-service.default.svc.cluster.local', port: 26379 }
+]
+const masterName = 'edis-master-service.default.svc.cluster.local'; // master节点的名字
+const opts = { // node_redis的相关属性设置
+    auth_pass: 'password', // 在版本较低的node_redis中使用auth_password作为密码，redis-sentinel及时属于版本较低的node_redis
+    // password: 'password', // 在版本高的node_redis中的密码属性
+    db: 0, // 如果设置，客户端将在连接上运行Redis select命令。
+};
+
+// 创建redisClient实例
+const redisClient = sentinel.createClient(sentinels, masterName, opts);
+
+redisClient.set('testName', 'lxjTest1');
+```
+
