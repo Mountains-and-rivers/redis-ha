@@ -29,7 +29,21 @@ Address 1: 10.244.2.27 redis-sentinel-service-0.redis-sentinel-service.default.s
 功能验证
 
 ```
- kubectl exec -ti redis-master-service-0 sh -- redis-cli -a rpasswd
+登录容器查看密码
+
+kubectl exec -ti redis-master-service-0 sh -- cat /redis-master/redis.conf |grep pass
+# If the master is password protected (using the "requirepass" configuration
+masterauth rpasswd
+# resync is enough, just passing the portion of data the slave missed while
+# 150k passwords per second against a good box. This means that you should
+# use a very strong password otherwise it will be very easy to break.
+requirepass rpasswd
+
+```
+查看角色
+
+```
+kubectl exec -ti redis-master-service-0 sh -- redis-cli -a rpasswd
 Warning: Using a password with '-a' or '-u' option on the command line interface may not be safe.
 127.0.0.1:6379> role
 1) "master"
