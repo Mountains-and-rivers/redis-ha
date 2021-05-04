@@ -13,9 +13,7 @@ docker build -t redis-sentinel-ha-cluster:1.0 .
 ```
 kubectl apply -f .
 ```
-
 ```
-验证：
 kubectl get svc
 NAME                     TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)     AGE
 kubernetes               ClusterIP   10.96.0.1      <none>        443/TCP     93m
