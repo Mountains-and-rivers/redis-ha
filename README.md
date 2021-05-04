@@ -24,7 +24,7 @@ redis-sentinel-service   ClusterIP   10.102.2.210   <none>        26379/TCP   23
 ```
 
 域名解析验证  
- #注意格式 $(podname).$(service name).$(namespace)
+ #格式 $(podname).$(service name).$(namespace)
 
 ```
 kubectl exec -ti busybox sh -- nslookup redis-sentinel-service-0.redis-sentinel-service
