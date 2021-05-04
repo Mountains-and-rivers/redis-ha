@@ -20,7 +20,17 @@ kubernetes               ClusterIP   10.96.0.1      <none>        443/TCP     93
 redis-master-service     ClusterIP   10.109.40.60   <none>        6379/TCP    23s
 redis-sentinel-service   ClusterIP   10.102.2.210   <none>        26379/TCP   23s
 ```
-
+```
+kubectl get pod
+NAME                       READY   STATUS    RESTARTS   AGE
+busybox                    1/1     Running   0          26m
+dnsutils                   1/1     Running   0          26m
+redis-master-service-0     1/1     Running   0          25m
+redis-sentinel-service-0   1/1     Running   0          26m
+redis-sentinel-service-1   1/1     Running   0          26m
+redis-sentinel-service-2   1/1     Running   0          26m
+redis-slave-service-0      1/1     Running   0          25m
+```
 域名解析验证  
  #格式 $(podname).$(service name).$(namespace)
 
