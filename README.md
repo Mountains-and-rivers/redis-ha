@@ -35,7 +35,7 @@ Name:      redis-sentinel-service-0.redis-sentinel-service
 Address 1: 10.244.2.27 redis-sentinel-service-0.redis-sentinel-service.default.svc.cluster.local
 ```
 
-登录容器查看密码
+查看密码
 ```
 
 kubectl exec -ti redis-master-service-0 sh -- cat /redis-master/redis.conf |grep pass
