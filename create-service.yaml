@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: redis-sentinel-service
+  name: redis-sentinel-service
+spec:
+  ports:
+    - port: 26379
+  selector:
+    app: redis-sentinel-service
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: redis-master-service
+  name: redis-master-service
+spec:
+  ports:
+    - port: 6379
+  selector:
+    app: redis-master-service

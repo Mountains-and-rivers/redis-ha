@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-sentinel-service
+spec:
+  replicas: 3
+  serviceName: redis-sentinel-service
+  selector:
+    matchLabels:
+      app: redis-sentinel-service
+  template:
+    metadata:
+      name: redis-sentinel-service
+      labels:
+        app: redis-sentinel-service
+    spec:
+      # affinity:
+      #   podAntiAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #     - labelSelector:
+      #         matchExpressions:
+      #         - key: app
+      #           operator: In
+      #           values:
+      #           - redis-sentinel-service
+      #       topologyKey: "kubernetes.io/hostname"
+
+      restartPolicy: Always
+      containers:
+      - name: redis-ha-cluster-sentinel-c1
+        image: redis-sentinel-ha-cluster:1.0
+
+        resources:
+          requests:
+            memory: "100Mi"
+            cpu: .2
+          limits:
+            memory: "200Mi"
+            cpu: .5
+
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 26379
+
+        env:
+        - name: SENTINEL
+          value: "true"
